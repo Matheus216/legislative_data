@@ -8,4 +8,29 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+  <None Update="Infrastructure\Resources\bills.csv">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+  </ItemGroup>
+
+  <ItemGroup>
+  <None Update="Infrastructure\Resources\legislators.csv">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+  </ItemGroup>
+
+ <ItemGroup>
+  <None Update="Infrastructure\Resources\vote_results.csv">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+  </ItemGroup>
+
+ <ItemGroup>
+  <None Update="Infrastructure\Resources\votes.csv">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+  </ItemGroup>
+
+
 </Project>
