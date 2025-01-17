@@ -28,7 +28,7 @@ public class BillGeneratorService
             var suport = serviceVoteResult.CalculateTotalLegistatorsSuportByBill(vote.Id);
             var oppose = serviceVoteResult.CalculateTotalLegistatorOpposeByBill(vote.Id);
 
-            sb.AppendLine($"{vote.Bill.Id};{vote.Bill.Title};{suport};{oppose};{vote.Bill.Person.Name}");
+            sb.AppendLine($"{vote?.Bill?.Id};{vote?.Bill?.Title};{suport};{oppose};{vote?.Bill?.Person.Name}");
         }
 
         return FileHelper.GenerateFile(sb.ToString(), "bills.csv");;

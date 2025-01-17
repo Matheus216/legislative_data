@@ -5,9 +5,9 @@ public class Vote
 {
     public long Id { get; private init; }
     public long BillId { get; private init; }
-    public Bill Bill { get; private init; }
+    public Bill? Bill { get; private init; }
 
-    public Vote(long id, long billId, Bill bill) 
+    public Vote(long id, long billId, Bill? bill) 
     {
         Id = id;
         BillId = billId;
@@ -15,7 +15,7 @@ public class Vote
         Validate();          
     }
 
-    public void Validate()
+    private void Validate()
     {
         if (Id == 0)
         {

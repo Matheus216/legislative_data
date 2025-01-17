@@ -7,16 +7,16 @@ public class VoteResult
     public long Id { get; private set; }
     public long PersonId { get; private set; }
     public long VoteId { get; private set; }
-    public Person Person { get; private set; }
-    public Vote Vote { get; private set; }
+    public Person? Legislator { get; private set; }
+    public Vote? Vote { get; private set; }
     public VoteTypeEnum VoteType { get; private set; }
 
-    public VoteResult(long id, long personId, long voteId, Person person, Vote vote, VoteTypeEnum voteType)
+    public VoteResult(long id, long personId, long voteId, Person? legislator, Vote? vote, VoteTypeEnum voteType)
     {
         Id = id;
         PersonId = personId;
         VoteId = voteId;
-        Person = person;
+        Legislator = legislator;
         Vote = vote;
         VoteType = voteType;
         Validate();
@@ -36,7 +36,7 @@ public class VoteResult
         {
             throw new ArgumentException("VoteId cannot be zero");
         }
-        if (Person is null)
+        if (Legislator is null)
         {
             throw new ArgumentException("Person cannot be null");
         }

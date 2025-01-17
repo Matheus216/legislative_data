@@ -17,7 +17,7 @@ public class Bill
         Validate();     
     }
 
-    public void Validate()
+    private void Validate()
     {
         if (string.IsNullOrEmpty(Title))
         {
