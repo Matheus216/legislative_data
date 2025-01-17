@@ -8,13 +8,13 @@ namespace bill_project.infrastructure;
 /// In here I would make one repository for each entity but to void overengineering 
 /// I will make one repository for all files
 /// </summary>
-public class FilesRepository
+public class FileRepository
 {
     private readonly string _path;
 
-    public FilesRepository()
+    public FileRepository()
     {
-        _path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "infrastucture", "Resources");    
+        _path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "infrastructure", "Resources");    
     }
 
     public async Task<List<string[]>> ReadFile(string fileName)
@@ -24,9 +24,15 @@ public class FilesRepository
         using var reader = new StreamReader(Path.Combine(_path, fileName));
 
         string? line;
+        bool head = true;
 
         while ((line = await reader.ReadLineAsync()) != null)
         {
+            if (head)
+            {
+                head = false;
+                continue;
+            }
             response.Add(line.Split(','));
         }
 
