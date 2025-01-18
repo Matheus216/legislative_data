@@ -128,23 +128,4 @@ public class BillVoteService
 
         return voteResults;
     }
-
-    private string GenerateLegislatorContentFile(IEnumerable<VoteResult> voteResult, IEnumerable<Person> personList)
-    {
-        var serviceVoteResult = new VoteResultService(voteResult);
-
-        var sb = new StringBuilder();
-
-        sb.AppendLine("Id;Name;Num_Supported_Bills;Num_Opposed_Bills");
-
-        foreach(var person in personList)
-        {
-            var suport = serviceVoteResult.CalculateTotalSuportByLegislator(person.Id);
-            var oppose = serviceVoteResult.CalculateTotalOpposeByLegislator(person.Id);
-
-            sb.AppendLine($"{person.Id};{person.Name};{suport};{oppose}");
-        }
-
-        return sb.ToString();
-    }
 }
