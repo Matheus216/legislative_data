@@ -20,6 +20,7 @@ public class VoteResultServiceTest : BaseTest
     public void CalculateTotalSuportByLegislatorShouldBeValid() 
     {
         // Arrange
+        SetPersonList(6);
         var voteResult = GetVoteResults();
 
         var voteResultService = new VoteResultService(voteResult);
@@ -40,6 +41,7 @@ public class VoteResultServiceTest : BaseTest
     public void CalculateTotalSuportByBillShouldBeValid() 
     {
         // Arrange
+        SetPersonList(6);
         var voteResult = GetVoteResults();
 
         var voteResultService = new VoteResultService(voteResult);
@@ -51,10 +53,11 @@ public class VoteResultServiceTest : BaseTest
             var opposeBill = voteResultService.CalculateTotalLegistatorOpposeByBill(x.Id);
             
             // Assert
-            Assert.Equal(1,supportBill);
-            Assert.Equal(1,opposeBill);            
+            Assert.Equal(3,supportBill);
+            Assert.Equal(3,opposeBill);            
+            Assert.Equal(6,opposeBill + supportBill);            
         }
         
-        Assert.Equal(4, voteResult.Count());
+        Assert.Equal(12, voteResult.Count());
     }
 }

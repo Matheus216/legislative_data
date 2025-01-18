@@ -19,18 +19,7 @@ public class BaseTest
         }
     }
     
-    private List<PersonEntity>? _personList;
-    public List<PersonEntity> PersonList
-    {
-        get { 
-            if (_personList is null || _personList.Count == 0)
-            {
-                _personList = GetPersonList();
-            }
-            return _personList; 
-        }
-    }
-
+    public IEnumerable<PersonEntity> PersonList { get; private set; } = Enumerable.Empty<PersonEntity>();
     private List<Bill>? _billList;
     public List<Bill> BillList
     {
@@ -60,23 +49,31 @@ public class BaseTest
     public string GetRandomName() =>
         Faker?.Name.FirstName() ?? "";    
 
-    public List<PersonEntity> GetPersonList()
+
+    public void SetPersonList(int quantity)
     {
-        var personList = new List<PersonEntity> 
-        {
-            new PersonEntity(GetRandomNumber(), GetRandomName()),
-            new PersonEntity(GetRandomNumber(), GetRandomName()),
-            new PersonEntity(GetRandomNumber())
-        };
-        return personList;
+        PersonList = GetPersonList(quantity).ToList();
     }
 
+    public IEnumerable<PersonEntity> GetPersonList(int quantity)
+    {
+        var personList = Enumerable.Range(0,quantity)
+            .Select(x => new PersonEntity(GetRandomNumber(), GetRandomName()))
+            .ToList();
+        
+        personList
+            .Add(new PersonEntity(GetRandomNumber()));
+        
+        return personList;
+    }
     public List<Bill> GetBillList() 
     {
+        var unknown = PersonList.FirstOrDefault(x => x.Name == "Unknown") ?? null;
+        var another = PersonList.FirstOrDefault(x => x.Name != "Unknown") ?? null;
         var billsList = new List<Bill> 
         {
-            new Bill(GetRandomNumber(), GetRandomName(), PersonList[0].Id, PersonList[0]),
-            new Bill(GetRandomNumber(), GetRandomName(), PersonList[1].Id, PersonList[1])
+            new Bill(GetRandomNumber(), GetRandomName(), another?.Id ?? 0, another),
+            new Bill(GetRandomNumber(), GetRandomName(), unknown?.Id ?? 0, unknown)
         };
         return billsList;
     }
@@ -93,45 +90,27 @@ public class BaseTest
 
     public IEnumerable<VoteResult> GetVoteResults()
     {
-        var voteResult = new List<VoteResult> 
+        var voteResult = new List<VoteResult>();
+        var type = VoteTypeEnum.Yea;
+
+        foreach (var x in PersonList.Where(x => x.Name != "Unknown"))
         {
-            new VoteResult
-            (
-                GetRandomNumber(), 
-                PersonList[0].Id, 
-                VoteList[0].Id, 
-                PersonList[0], 
-                VoteList[0], 
-                VoteTypeEnum.Yea
-            ),
-            new VoteResult
-            (
-                GetRandomNumber(), 
-                PersonList[0].Id, 
-                VoteList[1].Id, 
-                PersonList[0], 
-                VoteList[1], 
-                VoteTypeEnum.Nay
-            ),
-            new VoteResult
-            (
-                GetRandomNumber(), 
-                PersonList[1].Id, 
-                VoteList[0].Id, 
-                PersonList[1], 
-                VoteList[0], 
-                VoteTypeEnum.Nay
-            ),
-            new VoteResult
-            (
-                GetRandomNumber(), 
-                PersonList[1].Id, 
-                VoteList[1].Id, 
-                PersonList[1], 
-                VoteList[1], 
-                VoteTypeEnum.Yea
-            )
-        };
+            type = type == VoteTypeEnum.Yea ? VoteTypeEnum.Nay : VoteTypeEnum.Yea;
+            foreach (var y in VoteList)
+            {
+                type = type == VoteTypeEnum.Yea ? VoteTypeEnum.Nay : VoteTypeEnum.Yea;
+                
+                voteResult.Add(new VoteResult
+                (
+                    GetRandomNumber(), 
+                    x.Id,
+                    y.Id,
+                    x,
+                    y,
+                    type
+                ));
+            }
+        }
 
         return voteResult;
     }

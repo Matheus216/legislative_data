@@ -1,0 +1,5 @@
+{
+    "omnisharp.useModernNet": true,
+    "omnisharp.enableMsBuildLoadProjectsOnDemand": false,
+    "omnisharp.enableRoselynAnalyzers": true,
+}
