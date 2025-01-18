@@ -4,7 +4,13 @@
 - Project: https://github.com/Matheus216/legislative_data.git
 - .NET 8 ou maior
 
-### Steps
+
+### Execute program 
+
+If you're using windows copy the executable from the "publishRelease" folder `publishRelease/1.0.0.exe` and put in another directory and run it. The CSV files will be saved in the "generated_reports" directory. 
+
+
+### Step by step to generate new release
 1. Clone the project or save it to a directory on your computer.
 
 2. ENavigate to the directory where the `.sln` file is located, then run the following command:
