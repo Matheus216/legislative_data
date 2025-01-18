@@ -1,5 +1,25 @@
 ## WORKING WITH LEGISTATIVE DATA
 ----
+### Requirements to run 
+- Project: https://github.com/Matheus216/legislative_data.git
+- .NET 8 ou maior
+
+### Steps
+1. Clone the project or save it to a directory on your computer.
+
+2. ENavigate to the directory where the `.sln` file is located, then run the following command:
+
+- `dotnet publish -C Release -o ./dist`
+
+3. This will generate the executable:
+- `bill-project.exe` for windows 
+- `bill-project` for linux 
+
+4. To run the project, use the following command:
+- `dotnet ./bill-project.exe`
+
+5. The CSV files will be saved in the "generated_reports" directory, located inside the dist directory.
+
 
 ### Questions 
 

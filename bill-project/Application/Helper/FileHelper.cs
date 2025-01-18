@@ -7,7 +7,7 @@ public static class FileHelper
     public static string GenerateFile(string content, string reportName)
     {
         string projectDirectory = Path.Combine(
-            Directory.GetParent(Directory.GetCurrentDirectory())?.Parent?.Parent?.Parent?.FullName ?? ""
+            Directory.GetCurrentDirectory() ?? ""
             ,"generated_reports"
             );
 

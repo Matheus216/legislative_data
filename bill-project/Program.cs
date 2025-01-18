@@ -3,3 +3,5 @@
 var service = new BillVoteService();   
 
 service.GenerateResultBillVote().Wait(); 
+
+Console.ReadLine();

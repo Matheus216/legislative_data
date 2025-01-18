@@ -17,7 +17,7 @@ public class BillVoteService
 
     public async Task GenerateResultBillVote()
     {
-        Debug.WriteLine($"Started process to generate bill and legislator report at {DateTime.Now}");
+        Console.WriteLine($"Started process to generate bill and legislator report at {DateTime.Now}");
 
         var taskPerson = GetPerson();
         var taskBills = GetBills(await taskPerson);
@@ -27,15 +27,15 @@ public class BillVoteService
         var legistatorContent = new LegislatorGeneratorService(await taskPerson, await taskVoteResult);
         var billGenerator = new BillGeneratorService(await taskVote, await taskVoteResult);
     
-        Debug.WriteLine("Getting data to generate bill and legislator report");
+        Console.WriteLine("Getting data to generate bill and legislator report");
 
         var pathDestinyBill = billGenerator.Execute();
         var pathDestinyLegislator = legistatorContent.Execute();
 
-        Debug.WriteLine($"File generated in {pathDestinyBill}");
-        Debug.WriteLine($"File generated in {pathDestinyLegislator}");
+        Console.WriteLine($"File generated in {pathDestinyBill}");
+        Console.WriteLine($"File generated in {pathDestinyLegislator}");
 
-        Debug.WriteLine($"Finished process to generate bill and legislator report at {DateTime.Now}");
+        Console.WriteLine($"Finished process to generate bill and legislator report at {DateTime.Now}");
     }
 
     public async Task<IEnumerable<Bill>> GetBills(IEnumerable<Person> personList)
