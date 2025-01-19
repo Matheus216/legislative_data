@@ -7,7 +7,7 @@
 
 ### Execute program 
 
-If you're using windows copy the executable from the "publishRelease" folder `publishRelease/1.0.0.exe` and put in another directory and run it. The CSV files will be saved in the "generated_reports" directory. 
+If you're using windows copy the executable from the "publishRelease" folder `dist/bill-project.exe` and put in another directory and run it. The CSV files will be saved in the "generated_reports" directory. 
 
 
 ### Step by step to generate new release
